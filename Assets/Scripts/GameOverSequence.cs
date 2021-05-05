@@ -24,12 +24,11 @@ public class GameOverSequence : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         ReadyToReload = true;
         ballBehaviour.IsLaunched = false;
-        ballBehaviour.BallPosition();
-
+        ballBehaviour.UpdateBallPosition();
     }
+
     #endregion
 }

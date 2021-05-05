@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2505885104807444600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.66, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,12 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBehaviour: {fileID: 8435746322763190177, guid: 2902982af1a03374f93e0084881be6f9,
     type: 3}
-  blocksLifecycle:
-  - {fileID: 6845427144453626757, guid: 5d6f6a85b37d3a843a34f17966ef21be, type: 3}
-  - {fileID: 1919898800209568638, guid: 1daf17276241f154b882e243d25fd68e, type: 3}
-  - {fileID: 2505885104807444600}
-  - {fileID: 5056400591618716294, guid: 361a9f4de62ba2b4481eefe3ff330916, type: 3}
-  pointsForDestruction: 0
+  blocksByStages: []
+  score: {fileID: 0}
 --- !u!61 &6702074397278096577
 BoxCollider2D:
   m_ObjectHideFlags: 0

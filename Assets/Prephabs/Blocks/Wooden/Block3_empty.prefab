@@ -97,11 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBehaviour: {fileID: 8435746322763190177, guid: 2902982af1a03374f93e0084881be6f9,
     type: 3}
-  blocksLifecycle:
-  - {fileID: 8815498922856751548, guid: 38952d76ca4ea0241bacb55789e53d45, type: 3}
-  - {fileID: 5844833098310061494, guid: 86637c6956c7ee24f9c9c1fbef8ae1ec, type: 3}
-  - {fileID: 4368137070095450745}
-  pointsForDestruction: 100
+  blocksByStages: []
 --- !u!61 &2926520088011985014
 BoxCollider2D:
   m_ObjectHideFlags: 0

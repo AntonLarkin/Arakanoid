@@ -11,8 +11,11 @@ public class BallBehaviour : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private GameObject padTransform;
     [SerializeField] private float startPositionY;
+    [SerializeField] private float minValueX;
+    [SerializeField] private float maxValueX;
+    [SerializeField] private float minValueY;
+    [SerializeField] private float maxValueY;
 
-    private Vector2 direction;
     private bool isLaunched;
 
     #endregion
@@ -29,19 +32,15 @@ public class BallBehaviour : MonoBehaviour
 
     private void Update()
     {
-
         if (!IsLaunched)
         {
-            BallPosition();
+            UpdateBallPosition();
 
             if (Input.GetMouseButtonDown(0))
             {
-
                 LaunchBall();
             }
-
         }
-
     }
 
     #endregion
@@ -51,15 +50,15 @@ public class BallBehaviour : MonoBehaviour
 
     private void LaunchBall()
     {
-        SetDirection();
+        Vector2 direction = GetRandomDirection();
         Vector2 force = direction * speed;
         rb.AddForce(force);
         IsLaunched = true;
     }
 
-    private void SetDirection()
+    private Vector2 GetRandomDirection()
     {
-        direction = new Vector2(Random.Range(-3, 3), Random.Range(3, 5));
+        return new Vector2(Random.Range(minValueX, maxValueX), Random.Range(minValueY, maxValueY)).normalized;
     }
 
     #endregion
@@ -67,9 +66,8 @@ public class BallBehaviour : MonoBehaviour
 
     #region Public methods
 
-    public void BallPosition()
+    public void UpdateBallPosition()
     {
-
         Vector3 padPosition = padTransform.transform.position;
         padPosition.y = startPositionY;
         transform.position = padPosition;

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Blocks : MonoBehaviour
 {
 
     #region Variables
 
-    public GameBehaviour gameBehaviour;
-
-    [SerializeField] private GameObject[] blocksLifecycle;
-    private int stage;
+    [SerializeField] private GameBehaviour gameBehaviour;
+    [SerializeField] private GameObject[] blocksByStages;
+    [SerializeField] private ScoreUpdater score;
+    //private int stage;
 
     #endregion
 
@@ -21,22 +22,32 @@ public class Blocks : MonoBehaviour
 
     #endregion
 
+    public static event Action<GameObject, int> OnBlockDestroyed;
 
+    public void Reload()
+    {
+        gameObject.SetActive(true);
+        Stage = 0;
+
+        for (int i = 0; i < blocksByStages.Length; i++)
+        {
+            blocksByStages[i].SetActive(true);
+        }
+
+    }
     #region Unity lifecycle
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (Stage == blocksLifecycle.Length - 1)
+        if (Stage == blocksByStages.Length - 1)
         {
-            blocksLifecycle[Stage].SetActive(false);
-            transform.parent.gameObject.SetActive(false);
-            gameBehaviour.defeatedBlocks.Add(transform.parent.gameObject);
-            gameBehaviour.UpdateScore(transform.parent.gameObject.GetComponent<ScoreUpdater>().Score);
+            gameObject.SetActive(false);
+            OnBlockDestroyed?.Invoke(gameObject, score.Score);
+            return;
         }
-
-        blocksLifecycle[Stage].SetActive(false);  //Если уничтожать каждую "стадию", то выдает ошибку, мол, я уничтожаю ассет, хотя я уничтожаю префаб!!!!  \_"з_/
+        blocksByStages[Stage].SetActive(false);
         Stage++;
+        blocksByStages[Stage].SetActive(true);
 
     }
 

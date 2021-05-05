@@ -96,12 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b468c1ff4c7b2394ab5d34749b2a35d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: {fileID: 0}
   rb: {fileID: 5093796749417988345}
-  speed: 150
+  speed: 350
   padTransform: {fileID: 6665095629129127851, guid: 5af959479dceb16408dc3e016f734a01,
     type: 3}
-  startPositionY: -2.5
+  startPositionY: -2.7
+  minValueX: -3
+  maxValueX: 3
+  minValueY: 4
+  maxValueY: 5
 --- !u!58 &5093796749417988344
 CircleCollider2D:
   m_ObjectHideFlags: 0
