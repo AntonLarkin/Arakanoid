@@ -11,7 +11,8 @@ public class Blocks : MonoBehaviour
     [SerializeField] private GameBehaviour gameBehaviour;
     [SerializeField] private GameObject[] blocksByStages;
     [SerializeField] private ScoreUpdater score;
-    //private int stage;
+
+    private LevelManager levelManager;
 
     #endregion
 
@@ -33,14 +34,19 @@ public class Blocks : MonoBehaviour
         {
             blocksByStages[i].SetActive(true);
         }
-
     }
+
     #region Unity lifecycle
 
+    private void Start()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (Stage == blocksByStages.Length - 1)
         {
+            levelManager.BlockDestroyed();
             gameObject.SetActive(false);
             OnBlockDestroyed?.Invoke(gameObject, score.Score);
             return;

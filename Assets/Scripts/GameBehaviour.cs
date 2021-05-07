@@ -13,15 +13,16 @@ public class GameBehaviour : MonoBehaviour
     [SerializeField] private List<Blocks> blocks;
     [SerializeField] private Text scoreLabel;
 
-    //private List<GameObject> defeatedBlocks = new List<GameObject>();
+    private LevelManager levelManager;
 
     #endregion
-
+    
 
     #region Properties
     public int TotalScore { get; private set; }
 
     #endregion
+
 
     #region Unity lifecycle
 
@@ -30,11 +31,10 @@ public class GameBehaviour : MonoBehaviour
         Blocks.OnBlockDestroyed += Blocks_OnBlocksDestroyed;
     }
 
-
-
     private void Start()
     {
-        scoreLabel.text = "0";
+        levelManager = FindObjectOfType<LevelManager>();
+        ReloadScore();
     }
 
     private void Update()
@@ -43,6 +43,7 @@ public class GameBehaviour : MonoBehaviour
         {
             ReloadBlocks(blocks);
             gameOver.ReadyToReload = false;
+            levelManager.SetBlocksquantity();
             ReloadScore();
         }
     }
@@ -80,14 +81,12 @@ public class GameBehaviour : MonoBehaviour
         UpdateScoreLabel();
     }
 
-
     #endregion
 
     #region Event handlers
 
     private void Blocks_OnBlocksDestroyed(GameObject block, int score)
     {
-        //defeatedBlocks.Add(block);
         UpdateScore(score);
     }
 

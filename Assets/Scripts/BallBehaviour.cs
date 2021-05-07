@@ -7,15 +7,21 @@ public class BallBehaviour : MonoBehaviour
 
     #region Variables
 
+    [Header("Base settings")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float speed;
-    [SerializeField] private GameObject padTransform;
-    [SerializeField] private float startPositionY;
-    [SerializeField] private float minValueX;
-    [SerializeField] private float maxValueX;
-    [SerializeField] private float minValueY;
-    [SerializeField] private float maxValueY;
 
+    [Header("Random direction")]
+    [SerializeField] private float speed;
+    [SerializeField] private float startPositionY;
+    [SerializeField] private float startDirectionY;
+
+    [Range(-5,0)]
+    [SerializeField] private float minValueX;
+
+    [Range(0, 5)]
+    [SerializeField] private float maxValueX;
+
+    private Transform padTransform;
     private bool isLaunched;
 
     #endregion
@@ -30,6 +36,10 @@ public class BallBehaviour : MonoBehaviour
 
     #region Unity lifecycle
 
+    private void Start()
+    {
+        padTransform = FindObjectOfType<PadBehaviour>().transform;
+    }
     private void Update()
     {
         if (!IsLaunched)
@@ -50,15 +60,16 @@ public class BallBehaviour : MonoBehaviour
 
     private void LaunchBall()
     {
-        Vector2 direction = GetRandomDirection();
-        Vector2 force = direction * speed;
-        rb.AddForce(force);
+        rb.velocity = GetRandomDirection();
         IsLaunched = true;
     }
 
     private Vector2 GetRandomDirection()
     {
-        return new Vector2(Random.Range(minValueX, maxValueX), Random.Range(minValueY, maxValueY)).normalized;
+        float xPosition = Random.Range(minValueX, maxValueX);
+        Vector2 direction = new Vector2(xPosition, startDirectionY).normalized;
+        Vector2 velocity = direction * speed;
+        return velocity;
     }
 
     #endregion
@@ -68,7 +79,8 @@ public class BallBehaviour : MonoBehaviour
 
     public void UpdateBallPosition()
     {
-        Vector3 padPosition = padTransform.transform.position;
+        Vector3 padPosition = padTransform.position;
+        //padPosition.y = transform.position.y;
         padPosition.y = startPositionY;
         transform.position = padPosition;
     }

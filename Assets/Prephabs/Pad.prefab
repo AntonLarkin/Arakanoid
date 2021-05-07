@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6665095629129127854}
   - component: {fileID: 6665095629129127853}
   - component: {fileID: 6665095629129127852}
-  - component: {fileID: 6665095629129127855}
+  - component: {fileID: 8472225185655692370}
   m_Layer: 0
   m_Name: Pad
   m_TagString: Untagged
@@ -95,8 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba50ee3856164342b9fa6d90b784660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &6665095629129127855
-BoxCollider2D:
+  minX: -7.2
+  maxX: 7.2
+--- !u!60 &8472225185655692370
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,6 +120,11 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.142857, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.04660225, y: 0.6787157}
+      - {x: -1.5364327, y: 0.4562552}
+      - {x: -1.5714285, y: -0.5}
+      - {x: 0.68585324, y: -0.5}
+      - {x: 1.5714285, y: -0.5}
+      - {x: 1.5451815, y: 0.43875718}
